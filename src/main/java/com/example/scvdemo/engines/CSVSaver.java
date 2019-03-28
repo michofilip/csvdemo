@@ -38,4 +38,18 @@ public class CSVSaver {
 
         csvWriter.close();
     }
+
+    public static void save(List objects, PrintWriter writer, Class aClass) throws IOException {
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(writer, CsvPreference.STANDARD_PREFERENCE);
+
+        String[] header = Arrays.stream(aClass.getDeclaredFields()).map(Field::getName).toArray(String[]::new);
+
+        csvWriter.writeHeader(header);
+
+        for (Object o : objects) {
+            csvWriter.write(o, header);
+        }
+
+        csvWriter.close();
+    }
 }

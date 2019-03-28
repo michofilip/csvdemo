@@ -6,7 +6,6 @@ import com.example.scvdemo.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,7 +22,8 @@ public class UserService {
 
     public void downloadCSV(PrintWriter writer) throws IOException {
         List<User> users = getAll();
-        CSVSaver.saveUsers(users, writer);
+//        CSVSaver.saveUsers(users, writer);
+        CSVSaver.save(users, writer, User.class);
     }
 
 }
